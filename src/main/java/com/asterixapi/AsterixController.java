@@ -28,7 +28,7 @@ public class AsterixController {
         return characterRepo.findAllBy(query);
     }
 
-    @PostMapping("/asterix/character/create")
+    @PostMapping("/asterix/character")
     public ResponseEntity<String> createCharacter(@RequestBody Character character) {
         characterRepo.save(character);
         return ResponseEntity.ok("Character has been added");
