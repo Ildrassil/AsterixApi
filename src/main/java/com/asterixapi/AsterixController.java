@@ -1,14 +1,12 @@
 package com.asterixapi;
 
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 @RestController
 public class AsterixController {
@@ -21,12 +19,7 @@ public class AsterixController {
 
     @GetMapping("/asterix/characters")
     public List<Character> getAllCharacters() {
-
-
-
         return characterRepo.findAll();
-
-
     }
 
     @PostMapping("/asterix/character/create")
