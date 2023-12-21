@@ -2,11 +2,13 @@ package com.asterixapi;
 
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.Query;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -29,18 +31,20 @@ public class AsterixController {
     }
 
     @PostMapping("/asterix/character")
-    public ResponseEntity<String> createCharacter(@RequestBody Character character) {
-        characterRepo.save(character);
-        return ResponseEntity.ok("Character has been added");
+    @ResponseStatus(HttpStatus.CREATED)
+    public Character createCharacter(@RequestBody Character character) {
+        return characterRepo.save(character);
+
     }
 
     @DeleteMapping("/asterix/character/{id}")
-    public ResponseEntity<?> deleteCharacter(@PathVariable String id){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public List<Character> deleteCharacter(@PathVariable String id){
         if(characterRepo.findById(id).isPresent()) {
             characterRepo.deleteById(id);
-            return ResponseEntity.ok("Character has been removed");
+            return characterRepo.findAll();
         }
-        else return ResponseEntity.ok("Bad request");
+        else throw new NoSuchElementException("The Element you want to delete does not exist");
 
 
 
