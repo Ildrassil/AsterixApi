@@ -1,7 +1,9 @@
 package com.asterixapi;
 
-public record Character(
+import org.springframework.data.annotation.Id;
 
+public record Character(
+        @Id
         String id,
 
         String name,

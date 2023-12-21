@@ -23,18 +23,18 @@ public class AsterixController {
     }
 
     @PostMapping("/asterix/character/create")
-    public void createCharacter(Character character) {
+    public ResponseEntity<String> createCharacter(@RequestBody Character character) {
         characterRepo.save(character);
-        ResponseEntity.ok("Character has been added");
+        return ResponseEntity.ok("Character has been added");
     }
 
     @DeleteMapping("/asterix/character/{id}")
-    public void deleteCharacter(@PathVariable String id){
+    public ResponseEntity<?> deleteCharacter(@PathVariable String id){
         if(characterRepo.findById(id).isPresent()) {
             characterRepo.deleteById(id);
-            ResponseEntity.ok("Character has been removed");
+            return ResponseEntity.ok("Character has been removed");
         }
-        else ResponseEntity.badRequest();
+        else return ResponseEntity.ok("Bad request");
 
 
 
