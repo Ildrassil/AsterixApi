@@ -5,6 +5,7 @@ package com.asterixapi;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import java.util.List;
 
 
@@ -20,6 +21,11 @@ public class AsterixController {
     @GetMapping("/asterix/characters")
     public List<Character> getAllCharacters() {
         return characterRepo.findAll();
+    }
+
+    @GetMapping("/asterix/character/{query}")
+    public List<Character> findAllby(@PathVariable Query query){
+        return characterRepo.findAllBy(query);
     }
 
     @PostMapping("/asterix/character/create")
